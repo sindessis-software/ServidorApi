@@ -13,7 +13,7 @@ func main() {
 
 	db.DBConnection()
 
-	db.DB.AutoMigrate(models.Task{})
+	db.DB.AutoMigrate(models.Acceso{})
 	db.DB.AutoMigrate(models.User{})
 
 	r := mux.NewRouter()
@@ -25,12 +25,12 @@ func main() {
 	r.HandleFunc("/users/{id}", routes.GetUserHandler).Methods("GET")
 	r.HandleFunc("/users/{id}", routes.DeleteUserHandler).Methods("DELETE")
 
-	//Seccion Taks
+	//Seccion access
 
-	r.HandleFunc("/tasks", routes.GetTasksHandler).Methods("GET")
-	r.HandleFunc("/tasks", routes.CreateTaskHandler).Methods("POST")
-	r.HandleFunc("/tasks/{id}", routes.GetTaskHandler).Methods("GET")
-	r.HandleFunc("/tasks/{id}", routes.DeleteTasksHandler).Methods("DELETE")
+	r.HandleFunc("/access", routes.GetTasksHandler).Methods("GET")
+	r.HandleFunc("/access", routes.CreateTaskHandler).Methods("POST")
+	r.HandleFunc("/access/{id}", routes.GetTaskHandler).Methods("GET")
+	r.HandleFunc("/access/{id}", routes.DeleteTasksHandler).Methods("DELETE")
 
 	http.ListenAndServe(":3000", r)
 

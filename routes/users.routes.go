@@ -26,7 +26,7 @@ func GetUserHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	db.DB.Model(&user).Association("Tasks").Find(&user.Tasks)
+	db.DB.Model(&user).Association("Acceso").Find(&user.Acceso)
 
 	json.NewEncoder(w).Encode(&user)
 
@@ -59,7 +59,6 @@ func DeleteUserHandler(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("User not Found"))
 		return
 	}
-	//db.DB.Delete(&user)            // borrado logico
-	db.DB.Unscoped().Delete(&user) // borrado fisico
+	db.DB.Unscoped().Delete(&user)
 	w.WriteHeader(http.StatusOK)
 }
