@@ -9,46 +9,46 @@ import (
 	"github.com/sindessis-software/ApiRestPuntoVenta/models"
 )
 
-func GetTasksHandler(w http.ResponseWriter, r *http.Request) {
-	var tasks []models.Acceso
-	db.DB.Find(&tasks)
-	json.NewEncoder(w).Encode(&tasks)
+func GetAccesosHandler(w http.ResponseWriter, r *http.Request) {
+	var acceso []models.Acceso
+	db.DB.Find(&acceso)
+	json.NewEncoder(w).Encode(&acceso)
 }
 
-func CreateTaskHandler(w http.ResponseWriter, r *http.Request) {
-	var task models.Acceso
-	json.NewDecoder(r.Body).Decode(&task)
-	createTask := db.DB.Create(&task)
-	err := createTask.Error
+func CreateAccesoHandler(w http.ResponseWriter, r *http.Request) {
+	var acceso models.Acceso
+	json.NewDecoder(r.Body).Decode(&acceso)
+	createAcceso := db.DB.Create(&acceso)
+	err := createAcceso.Error
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		w.Write([]byte(err.Error()))
 		return
 	}
-	json.NewEncoder(w).Encode(&task)
+	json.NewEncoder(w).Encode(&acceso)
 }
 
-func GetTaskHandler(w http.ResponseWriter, r *http.Request) {
-	var task models.Acceso
+func GetAccesoHandler(w http.ResponseWriter, r *http.Request) {
+	var acceso models.Acceso
 	params := mux.Vars(r)
-	db.DB.First(&task, params["id"])
-	if task.ID == 0 {
+	db.DB.First(&acceso, params["id"])
+	if acceso.ID == 0 {
 		w.WriteHeader(http.StatusNotFound)
-		w.Write([]byte("Task not Found"))
+		w.Write([]byte("Acceso not Found"))
 		return
 	}
-	json.NewEncoder(w).Encode(task)
+	json.NewEncoder(w).Encode(acceso)
 }
 
-func DeleteTasksHandler(w http.ResponseWriter, r *http.Request) {
-	var task models.Acceso
+func DeleteAccesosHandler(w http.ResponseWriter, r *http.Request) {
+	var acceso models.Acceso
 	params := mux.Vars(r)
-	db.DB.First(&task, params["id"])
-	if task.ID == 0 {
+	db.DB.First(&acceso, params["id"])
+	if acceso.ID == 0 {
 		w.WriteHeader(http.StatusNotFound)
-		w.Write([]byte("Task not Found"))
+		w.Write([]byte("Accesos not Found"))
 		return
 	}
-	db.DB.Unscoped().Delete(&task)
+	db.DB.Unscoped().Delete(&acceso)
 	w.WriteHeader(http.StatusNoContent)
 }
