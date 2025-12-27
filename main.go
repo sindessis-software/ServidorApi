@@ -14,7 +14,7 @@ func main() {
 	db.DBConnection()
 
 	db.DB.AutoMigrate(models.Acceso{})
-	db.DB.AutoMigrate(models.User{})
+	db.DB.AutoMigrate(models.Usuarios{})
 	db.DB.AutoMigrate(models.Producto{})
 	//	db.DB.AutoMigrate(models.Unidades{})
 
@@ -22,12 +22,13 @@ func main() {
 
 	r.HandleFunc("/", routes.HomeHandler)
 
-	//Seccion Users
+	//Seccion Usuarios
 
-	r.HandleFunc("/users", routes.GetUsersHandler).Methods("GET")
-	r.HandleFunc("/users", routes.CreateUserHandler).Methods("POST")
-	r.HandleFunc("/users/{id}", routes.GetUserHandler).Methods("GET")
-	r.HandleFunc("/users/{id}", routes.DeleteUserHandler).Methods("DELETE")
+	r.HandleFunc("/usuarios", routes.GetUsuariosHandler).Methods("GET")
+	r.HandleFunc("/usuarios", routes.CreateUsuariosHandler).Methods("POST")
+	r.HandleFunc("/usuariosValida", routes.ValidateUsuariosHandler).Methods("POST")
+	r.HandleFunc("/usuarios/{id}", routes.GetUsuarioHandler).Methods("GET")
+	r.HandleFunc("/usuarios", routes.DeleteUsuariosHandler).Methods("DELETE")
 
 	//Seccion Access
 
