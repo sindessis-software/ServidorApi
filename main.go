@@ -14,9 +14,13 @@ func main() {
 	db.DBConnection()
 
 	db.DB.AutoMigrate(models.Acceso{})
+	db.DB.AutoMigrate(models.Carritos{})
+	db.DB.AutoMigrate(models.Cliente{})
+	db.DB.AutoMigrate(models.Compras{})
 	db.DB.AutoMigrate(models.Usuarios{})
 	db.DB.AutoMigrate(models.Producto{})
-	//	db.DB.AutoMigrate(models.Unidades{})
+	db.DB.AutoMigrate(models.Unidades{})
+	db.DB.AutoMigrate(models.Factura{})
 
 	r := mux.NewRouter()
 
@@ -29,6 +33,13 @@ func main() {
 	r.HandleFunc("/usuariosValida", routes.ValidateUsuariosHandler).Methods("POST")
 	r.HandleFunc("/usuarios/{id}", routes.GetUsuarioHandler).Methods("GET")
 	r.HandleFunc("/usuarios", routes.DeleteUsuariosHandler).Methods("DELETE")
+
+	//Seccion Clientes
+
+	r.HandleFunc("/cliente", routes.GetClientesHandler).Methods("GET")
+	r.HandleFunc("/cliente", routes.CreateClientesHandler).Methods("POST")
+	r.HandleFunc("/cliente/{id}", routes.GetClienteHandler).Methods("GET")
+	r.HandleFunc("/cliente/{id}", routes.DeleteClientesHandler).Methods("DELETE")
 
 	//Seccion Access
 
