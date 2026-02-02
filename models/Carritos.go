@@ -10,5 +10,4 @@ type Carritos struct {
 	Carrito_Status       string `gorm:"not null" json:"Carrito_Status"`
 	Carrito_Fecha_compra string `gorm:"not null" json:"Fecha_Compra"`
 	Carrito_Fecha_Update string `gorm:"not null" json:"Fecha_Update"`
-	//cls	Carrito_Productos    []Producto
 }

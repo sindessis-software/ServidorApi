@@ -19,7 +19,6 @@ func main() {
 	db.DB.AutoMigrate(models.Compras{})
 	db.DB.AutoMigrate(models.Usuarios{})
 	db.DB.AutoMigrate(models.Producto{})
-	db.DB.AutoMigrate(models.Unidades{})
 	db.DB.AutoMigrate(models.Factura{})
 
 	r := mux.NewRouter()
@@ -54,13 +53,6 @@ func main() {
 	r.HandleFunc("/productos", routes.CreateProductosHandler).Methods("POST")
 	r.HandleFunc("/productos/{id}", routes.GetProductoHandler).Methods("GET")
 	r.HandleFunc("/productos/{id}", routes.DeleteProductoHandler).Methods("DELETE")
-
-	//Seccion Unidades
-
-	r.HandleFunc("/unidades", routes.GetUnidadesHandler).Methods("GET")
-	r.HandleFunc("/unidades", routes.CreateUnidadHandler).Methods("POST")
-	r.HandleFunc("/unidades/{id}", routes.GetUnidadHandler).Methods("GET")
-	r.HandleFunc("/unidades/{id}", routes.DeleteUnidadHandler).Methods("DELETE")
 
 	http.ListenAndServe(":3000", r)
 
